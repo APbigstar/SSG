@@ -16,7 +16,7 @@ import contactIcon from "../../assets/images/contact.png";
 const useStyles = makeStyles({
 
     dropView: {
-        width:"100%",
+        width: "100%",
         height: "100%",
         position: "absolute",
         top: "0",
@@ -61,15 +61,19 @@ const useStyles = makeStyles({
             "#bbfa5c 93.40%, " +
             "#c5fa55 100.00%)",
         fontSize: "24px !important",
-        width: "197px",
-        height: "58px",
+        // width: "197px",
+        // height: "58px",
+        padding: "8px 30px !important",
         boxShadow: "none !important",
         fontWeight: "normal",
         color: "#141518",
         borderRadius: "50px !important",
         marginBottom: "50px !important",
         "@media (max-width: 430px)": {
+            fontSize: "20px !important",
             marginBottom: "0 !important",
+            padding: "2px 20px !important",
+
         },
         transition: "all 0.3s ease-in-out",
 
@@ -104,6 +108,7 @@ const useStyles = makeStyles({
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
+        paddingBottom: "20px"
     },
     menuGroup: {
         display: "flex",
@@ -119,6 +124,12 @@ const useStyles = makeStyles({
         transition: "all 0.1s ease-in-out",
         position: "relative",
         left: "10%",
+        "@media (max-width: 430px)": {
+            width: "40px",
+            height: "auto",
+            marginRight: "10px"
+        }
+
     },
     showIcon: {
         opacity: "1",
@@ -161,7 +172,7 @@ const Menu = ({ isMenuOpen }) => {
                 <Box className={`${classes.mainBox}`}>
                     <Box className={classes.content}>
                         <Box className={classes.navBarTrans}>
-                            <Box sx={{}}>
+                            <Box sx={{ marginLeft: "-34px"}}>
                                 <Box className={classes.menuGroup}>
                                     <img className={`${classes.mIcon} ${shouldShow['Home'] ? classes.showIcon : ""}`} src={homeIcon} />
                                     <div
