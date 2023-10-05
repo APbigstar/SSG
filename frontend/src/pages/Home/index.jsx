@@ -54,7 +54,6 @@ const Home = () => {
           </Box>
 
           <Menu isMenuOpen={isMenuOpen}/>
-          <div className={`${classes.dropView} ${ isMenuOpen ? classes.showContent: ""}`}></div>
       </Box>
     </>
   );

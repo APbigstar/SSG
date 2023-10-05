@@ -15,20 +15,28 @@ import contactIcon from "../../assets/images/contact.png";
 
 const useStyles = makeStyles({
 
-    mainBox: {
-        top: "50%",
-        left: "50%",
-        width: "93%",
-        height: "95%",
+    dropView: {
+        width:"100%",
+        height: "100%",
         position: "absolute",
-        backgroundColor: "rgb(55,59,60)",
-        transform: "translate(-50%, -50%)",
+        top: "0",
+        backgroundColor: "black",
         opacity: "0",
         transition: "all 0.1s ease-in-out",
-        zIndex: 5,
     },
-    dropView: {
-        backgroundColor: "black",
+    mainBox: {
+        width: "100%",
+        height: "100%",
+        padding: "50px 50px",
+        "@media (max-width: 430px)": {
+            padding: "45px 15px",
+        },
+    },
+    content: {
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgb(55,59,60)",
+        padding: "15px 0px"
     },
     listItemText: {
         display: "inline-block",
@@ -59,7 +67,6 @@ const useStyles = makeStyles({
         fontWeight: "normal",
         color: "#141518",
         borderRadius: "50px !important",
-        marginTop: "97px !important",
         marginBottom: "50px !important",
         "@media (max-width: 430px)": {
             marginBottom: "0 !important",
@@ -82,10 +89,10 @@ const useStyles = makeStyles({
         left: '50%',
         width: "17%",
         filter: "blur(10px)",
-        transform: "translate(135%, -180%)"
+        transform: "translate(135%, -145%)"
     },
     showContent: {
-        opacity: "0.9",
+        opacity: "1",
     },
     navBarTrans: {
         display: "flex",
@@ -97,7 +104,6 @@ const useStyles = makeStyles({
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        height: "625px"
     },
     menuGroup: {
         display: "flex",
@@ -116,7 +122,8 @@ const useStyles = makeStyles({
     },
     showIcon: {
         opacity: "1",
-        left: "0%"
+        left: "0%",
+
     },
     btnEffect: {
         width: "207px",
@@ -149,65 +156,72 @@ const Menu = ({ isMenuOpen }) => {
 
 
     return (
-        <Box className={`${classes.mainBox} ${isMenuOpen ? classes.showContent : ""}`}>
-            <Box className={classes.navBarTrans }>
-                <Box sx={{}}>
-                    <Box className={classes.menuGroup}>
-                        <img className={`${classes.mIcon} ${shouldShow['Home'] ? classes.showIcon : ""}`} src={homeIcon} />
-                        <div
-                            className={`${classes.listItemText} `}
-                            onMouseEnter={handleIcon}
-                            onMouseLeave={handleIcon}
-                        >
-                            Home
-                        </div>
+        <>
+            <Box className={`${classes.dropView}  ${isMenuOpen ? classes.showContent : ""}`}>
+                <Box className={`${classes.mainBox}`}>
+                    <Box className={classes.content}>
+                        <Box className={classes.navBarTrans}>
+                            <Box sx={{}}>
+                                <Box className={classes.menuGroup}>
+                                    <img className={`${classes.mIcon} ${shouldShow['Home'] ? classes.showIcon : ""}`} src={homeIcon} />
+                                    <div
+                                        className={`${classes.listItemText} `}
+                                        onMouseEnter={handleIcon}
+                                        onMouseLeave={handleIcon}
+                                    >
+                                        Home
+                                    </div>
+                                </Box>
+                                <Box className={classes.menuGroup}>
+                                    <img className={`${classes.mIcon} ${shouldShow['Service'] ? classes.showIcon : ""}`} src={serviceIcon} />
+                                    <div
+                                        className={`${classes.listItemText} `}
+                                        onMouseEnter={handleIcon}
+                                        onMouseLeave={handleIcon}
+                                    >
+                                        Service
+                                    </div>
+                                </Box>
+                                <Box className={classes.menuGroup}>
+                                    <img className={`${classes.mIcon}  ${shouldShow['Discover Us'] ? classes.showIcon : ""}`} src={discoverIcon} />
+                                    <div
+                                        className={`${classes.listItemText} `}
+                                        onMouseEnter={handleIcon}
+                                        onMouseLeave={handleIcon}
+                                    >
+                                        Discover Us
+                                    </div>
+                                </Box>
+                                <Box className={classes.menuGroup}>
+                                    <img className={`${classes.mIcon}   ${shouldShow['Contact'] ? classes.showIcon : ""}`} src={contactIcon} />
+                                    <div
+                                        className={`${classes.listItemText} `}
+                                        onMouseEnter={handleIcon}
+                                        onMouseLeave={handleIcon}
+                                    >
+                                        Contact
+                                    </div>
+                                </Box>
+                            </Box>
+                            <Box>
+                                <Button
+                                    variant="contained"
+                                    className={`${classes.buttonStyle} ${shouldShow['JOIN US'] ? classes.btnEffect : ""}`}
+                                    onMouseEnter={handleIcon}
+                                    onMouseLeave={handleIcon}
+                                >
+                                    Join Us
+                                </Button>
+                            </Box>
+                        </Box>
+
+                        <img src={multiRect} className={classes.multiRect} alt="img" />
+                        <img src={singleRect} className={classes.singleRect} alt="img" />
+
                     </Box>
-                    <Box className={classes.menuGroup}>
-                        <img className={`${classes.mIcon} ${shouldShow['Service'] ? classes.showIcon : ""}`} src={serviceIcon} />
-                        <div
-                            className={`${classes.listItemText} `}
-                            onMouseEnter={handleIcon}
-                            onMouseLeave={handleIcon}
-                        >
-                            Service
-                        </div>
-                    </Box>
-                    <Box className={classes.menuGroup}>
-                        <img className={`${classes.mIcon}  ${shouldShow['Discover Us'] ? classes.showIcon : ""}`} src={discoverIcon} />
-                        <div
-                            className={`${classes.listItemText} `}
-                            onMouseEnter={handleIcon}
-                            onMouseLeave={handleIcon}
-                        >
-                            Discover Us
-                        </div>
-                    </Box>
-                    <Box className={classes.menuGroup}>
-                        <img className={`${classes.mIcon}   ${shouldShow['Contact'] ? classes.showIcon : ""}`} src={contactIcon} />
-                        <div
-                            className={`${classes.listItemText} `}
-                            onMouseEnter={handleIcon}
-                            onMouseLeave={handleIcon}
-                        >
-                            Contact
-                        </div>
-                    </Box>
-                </Box>
-                <Box sx={{ height: "calc( 625px - 420px )" }}>
-                    <Button
-                        variant="contained"
-                        className={`${classes.buttonStyle} ${shouldShow['JOIN US'] ? classes.btnEffect : ""}`}
-                        onMouseEnter={handleIcon}
-                        onMouseLeave={handleIcon}
-                    >
-                        Join Us
-                    </Button>
                 </Box>
             </Box>
-
-            <img src={multiRect} className={classes.multiRect} alt="img" />
-            <img src={singleRect} className={classes.singleRect} alt="img" />
-        </Box>
+        </>
     )
 }
 

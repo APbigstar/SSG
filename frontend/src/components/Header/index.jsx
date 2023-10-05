@@ -53,6 +53,7 @@ const useStyles = makeStyles({
     "@media (max-width: 430px)": {
       marginTop: "8px",
       marginLeft: "-10px",
+      padding: "0 16px",
     }
   },
 
@@ -106,6 +107,11 @@ const useStyles = makeStyles({
   hiddenLogo: {
     opacity: "0",
     transition: "all 0.1s 0.05s ease-in-out",
+  },
+  logo: {
+    "@media (max-width: 430px)": {
+      width:"36px !important"
+    },
   }
 
 })
@@ -140,8 +146,9 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
         <div className={classes.brandLine}></div>
       </Box>
 
-      <Box className={`${classes.logo} ${ isMenuOpen ? classes.hiddenLogo : " "}`}>
+      <Box className={`${ isMenuOpen ? classes.hiddenLogo : " "}`}>
         <img
+          className={classes.logo}
           src={Logo}
           style={{ position: "relative" }}
           onMouseEnter={handleChange}
