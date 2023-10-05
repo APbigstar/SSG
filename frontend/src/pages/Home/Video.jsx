@@ -25,7 +25,7 @@ const Video = ( { isMenuOpen }) => {
   const setHeightRef = useRef(null);
 
   useEffect(() => {
-    const playbackConst = 100;
+    const playbackConst = 500;
     const setHeight = setHeightRef.current;
 
     const vid = vidRef.current;
@@ -50,7 +50,7 @@ const Video = ( { isMenuOpen }) => {
 
   return (
     <>
-      <Box style={{ position: "fixed", width: "100%", height: "100%" }}>
+      <Box style={{ position: "fixed", width: "100%", height: "100%", overflowX: "hidden" }}>
         <video ref={vidRef} className={classes.video} autoPlay loop>
           <source src={HomeVideo} type="video/mp4" />
         </video>
