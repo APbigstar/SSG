@@ -50,12 +50,12 @@ const Video = ( { isMenuOpen }) => {
 
   return (
     <>
-      <Box style={{ position: "fixed", width: "100%", height: "100%", overflowX: "hidden" }}>
+      <Box style={{ position: "fixed", width: "100%", height: "100%",  }}>
         <video ref={vidRef} className={classes.video} autoPlay loop>
           <source src={HomeVideo} type="video/mp4" />
         </video>
       </Box>
-      <div ref={setHeightRef}  className={`${ isMenuOpen ? classes.hideContent : ""}`}></div>
+      <div ref={setHeightRef}  className={`${ isMenuOpen ? classes.hideContent : ""}`} style={{overflowX: "hidden"}}></div>
     </>
   );
 };
