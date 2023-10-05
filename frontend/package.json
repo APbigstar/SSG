@@ -1,0 +1,65 @@
+{
+  "name": "stratfinder_project",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.11",
+    "@mui/material": "^5.14.11",
+    "@mui/styled-engine-sc": "^5.12.0",
+    "@mui/styles": "^5.12.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "chart.js": "^4.3.0",
+    "dotenv": "^16.0.3",
+    "lodash": "^4.17.21",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.2.0",
+    "react-grid-carousel": "^1.0.1",
+    "react-intersection-observer": "^9.5.2",
+    "react-player": "^2.13.0",
+    "react-router-dom": "^6.11.1",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "react-video-scroll": "^1.0.1",
+    "recharts": "^2.6.2",
+    "sass": "^1.62.1",
+    "scichart": "^3.1.333",
+    "scss": "^0.2.4",
+    "styled-components": "^5.3.10",
+    "typescript": "^5.0.4",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-plugin-react": "^7.33.2"
+  }
+}
