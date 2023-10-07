@@ -122,9 +122,6 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
   const [isShow, setIsShow] = React.useState(false)
   const langList = ["AN", "FR", "TR", "EN"];
 
-  const handleChange = () => {
-    setIsShow(!isShow);
-  }
 
   const showMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -141,9 +138,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
       </Box>
 
       <Box className={`${classes.brand} ${ isMenuOpen ? classes.navBarHideAction : classes.navBarShowAction} `} >
-        <div className={classes.brandLine}></div>
         <img src={Brand} className={classes.brandImg} />
-        <div className={classes.brandLine}></div>
       </Box>
 
       <Box className={`${ isMenuOpen ? classes.hiddenLogo : " "}`}>
@@ -151,12 +146,15 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
           className={classes.logo}
           src={Logo}
           style={{ position: "relative" }}
-          onMouseEnter={handleChange}
-          onMouseLeave={handleChange}
+          onMouseEnter={() => setIsShow(true)}
+          onMouseLeave={() => setIsShow(false)}
+          
         />
         <Collapse
           in={isShow}
           sx={{ position: "absolute" }}
+          onMouseEnter={() => setIsShow(true)}
+          onMouseLeave={() => setIsShow(false)}
         >
           <List>
             {langList.map((item) => (

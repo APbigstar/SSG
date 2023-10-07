@@ -68,7 +68,7 @@ const useStyles = makeStyles({
         fontWeight: "normal",
         color: "#141518",
         borderRadius: "50px !important",
-        marginBottom: "50px !important",
+        marginBottom: "60px !important",
         "@media (max-width: 430px)": {
             fontSize: "20px !important",
             marginBottom: "0 !important",
@@ -119,6 +119,7 @@ const useStyles = makeStyles({
         marginBottom: "20px"
     },
     mIcon: {
+        width: "60px",
         height: "45%",
         opacity: "0",
         transition: "all 0.1s ease-in-out",
@@ -133,7 +134,7 @@ const useStyles = makeStyles({
     },
     showIcon: {
         opacity: "1",
-        left: "0%",
+        left: "-5%",
 
     },
     btnEffect: {
