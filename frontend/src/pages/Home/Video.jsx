@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, } from "react";
 import Box from "@mui/material/Box";
 import HomeVideo from "../../assets/video/home_video.mp4";
 import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
+import  debounce  from "lodash/debounce";
 
 const useStyles = makeStyles({
   video: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Video = ( { isMenuOpen }) => {
+const Video = ({ isMenuOpen }) => {
 
   const classes = useStyles();
   const [isLoading, setIsLoading] = React.useState(true);
@@ -51,8 +52,18 @@ const Video = ( { isMenuOpen }) => {
     setIsLoading(false);
   }
 
+  const scrollUp =  
+    debounce(() => {
+      window.scrollTo(0, window.pageYOffset + (document.body.scrollHeight / 12) * 3.5);
+    }, 0)
+
+  const scrollDown =
+    debounce(() => {
+      window.scrollTo(0, window.pageYOffset - (document.body.scrollHeight / 12) * 2);
+    }, 0)
+
   useEffect(() => {
-    const playbackConst = 100;
+    const playbackConst = 1000;
     const setHeight = setHeightRef.current;
 
     const vid = vidRef.current;
@@ -62,17 +73,27 @@ const Video = ( { isMenuOpen }) => {
       vid.currentTime = 0;
     }
 
+
     function handleLoadedMetadata() {
       setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
     }
 
     vid.addEventListener("loadedmetadata", handleLoadedMetadata);
-    window.addEventListener('beforeunload', resetVideo); 
+    window.addEventListener('beforeunload', resetVideo);
 
     function scrollPlay() {
       const frameNumber = window.pageYOffset / playbackConst;
       vid.currentTime = frameNumber;
       window.requestAnimationFrame(scrollPlay);
+    }
+
+    window.onwheel = e => {
+      if (e.deltaY >= 0) {
+        scrollUp();  
+      } else {
+        scrollDown();
+      }
+
     }
 
     window.requestAnimationFrame(scrollPlay);
@@ -87,7 +108,7 @@ const Video = ( { isMenuOpen }) => {
 
   return (
     <>
-    
+
       <Box className={classes.videoContainer}>
         {
           isLoading && (
@@ -96,11 +117,11 @@ const Video = ( { isMenuOpen }) => {
             </div>
           )
         }
-        <video ref={vidRef} className={classes.video}   onLoadedData={handleLoadData}>
+        <video ref={vidRef} className={classes.video} onLoadedData={handleLoadData}>
           <source src={HomeVideo} type="video/mp4" />
         </video>
       </Box>
-      <div ref={setHeightRef}  className={`${ isMenuOpen ? classes.hideContent : ""}`} ></div>
+      <div ref={setHeightRef} className={`${isMenuOpen ? classes.hideContent : ""}`} ></div>
     </>
   );
 };

@@ -39,10 +39,12 @@ const useStyles = makeStyles({
 const Home = () => {
   const classes = useStyles();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+ 
 
   return (
     <>
       <Box className={classes.container}>
+
           <Header
             isMenuOpen={isMenuOpen}
             setIsMenuOpen={setIsMenuOpen}

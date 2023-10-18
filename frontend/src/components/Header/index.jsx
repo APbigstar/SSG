@@ -126,6 +126,10 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
   const showMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   }
+  const handleScroll = () => {
+     window.scrollTo(0, 600);
+     
+  }
 
   return (
     <Box className={classes.mainBox}>
@@ -139,6 +143,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
 
       <Box className={`${classes.brand} ${ isMenuOpen ? classes.navBarHideAction : classes.navBarShowAction} `} >
         <img src={Brand} className={classes.brandImg} />
+      <button onClick={handleScroll}>Scroll</button>
       </Box>
 
       <Box className={`${ isMenuOpen ? classes.hiddenLogo : " "}`}>
