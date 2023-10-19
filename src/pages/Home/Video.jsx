@@ -48,7 +48,10 @@ const Video = ({ isMenuOpen }) => {
   const vidRef = useRef(null);
   const setHeightRef = useRef(null);
 
-  const handleLoadData = () => {
+  
+
+  const handleLoadData = (err) => {
+    console.log(err);
     setIsLoading(false);
   }
 
@@ -84,17 +87,16 @@ const Video = ({ isMenuOpen }) => {
     function scrollPlay() {
       const frameNumber = window.pageYOffset / playbackConst;
       vid.currentTime = frameNumber;
-      window.requestAnimationFrame(scrollPlay);
-    }
-
-    window.onwheel = e => {
-      if (e.deltaY >= 0) {
-        scrollUp();  
-      } else {
-        scrollDown();
+      window.onwheel = e => {
+        if (e.deltaY >= 0) {
+          scrollUp();  
+        } else {
+          scrollDown();
+        }
       }
-
+      window.requestAnimationFrame(debounce(scrollPlay, 200));
     }
+
 
     window.requestAnimationFrame(scrollPlay);
 
@@ -117,7 +119,7 @@ const Video = ({ isMenuOpen }) => {
             </div>
           )
         }
-        <video ref={vidRef} className={classes.video} onLoadedData={handleLoadData}>
+        <video ref={vidRef} className={classes.video} onLoadedData={handleLoadData} playsInline>
           <source src={HomeVideo} type="video/mp4" />
         </video>
       </Box>
