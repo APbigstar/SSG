@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, } from "react";
 import Box from "@mui/material/Box";
-import HomeVideo from "../../assets/video/home_video.mp4";
+import HomeVideoMobile from "../../assets/video/home_video_mobile.mp4";
+import HomeVideoBrowser from "../../assets/video/home_video_browser.mp4";
 import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
@@ -41,7 +42,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Video = ({ isMenuOpen, }) => {
+const Video = ({ isMenuOpen, device }) => {
 
   const classes = useStyles();
   const [isLoading, setIsLoading] = React.useState(true);
@@ -143,7 +144,7 @@ const Video = ({ isMenuOpen, }) => {
           onTouchStart={handleStartTouch}
           onTouchEnd={handleEndTouch}
         >
-          <source src={HomeVideo} type="video/mp4" />
+          <source src={ device ? HomeVideoMobile : HomeVideoBrowser} type="video/mp4" />
         </video>
       </Box>
       <div ref={setHeightRef} className={`${isMenuOpen ? classes.hideContent : ""}`} ></div>
@@ -153,5 +154,6 @@ const Video = ({ isMenuOpen, }) => {
 
 Video.propTypes = {
   isMenuOpen: PropTypes.bool.isRequired,
+  device: PropTypes.bool.isRequired,
 };
 export default Video;
