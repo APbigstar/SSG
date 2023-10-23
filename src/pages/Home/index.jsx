@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import Menu from "./Menu";
 import Video from "./Video";
 import Content from "./Content";
+import { isMobile } from 'react-device-detect';
 const useStyles = makeStyles({
 
   container: {
@@ -51,7 +52,7 @@ const Home = () => {
           />
 
           <Box className={classes.section}>
-            <Video isMenuOpen={isMenuOpen}/>
+            <Video isMenuOpen={isMenuOpen} device={isMobile}/>
             <Content isMenuOpen={isMenuOpen}/>
           </Box>
 

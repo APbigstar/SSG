@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import HomeVideo from "../../assets/video/home_video.mp4";
 import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
-import  debounce  from "lodash/debounce";
+import debounce from "lodash/debounce";
 
 const useStyles = makeStyles({
   video: {
@@ -41,30 +41,44 @@ const useStyles = makeStyles({
   }
 });
 
-const Video = ({ isMenuOpen }) => {
+const Video = ({ isMenuOpen, }) => {
 
   const classes = useStyles();
   const [isLoading, setIsLoading] = React.useState(true);
   const vidRef = useRef(null);
   const setHeightRef = useRef(null);
+  let startY = 0;
 
-  
 
   const handleLoadData = (err) => {
     console.log(err);
     setIsLoading(false);
   }
 
-  const scrollUp =  
+  const scrollUp =
     debounce(() => {
       window.scrollTo(0, window.pageYOffset + (document.body.scrollHeight / 12) * 3.5);
-    }, 0)
+    }, 10)
 
   const scrollDown =
     debounce(() => {
       window.scrollTo(0, window.pageYOffset - (document.body.scrollHeight / 12) * 2);
-    }, 0)
+    }, 10)
 
+  const handleStartTouch = (event) => {
+    startY = event.touches[0].clientY;
+  }
+
+  const handleEndTouch = (event) => {
+    const endY = event.changedTouches[0].clientY;
+    const deltaY = endY - startY;
+
+    if (deltaY > 0) {
+      window.scrollTo(0, window.pageYOffset - ((document.body.scrollHeight / 12) * 2));
+    } else if (deltaY < 0) {
+      window.scrollTo(0, window.pageYOffset + ((document.body.scrollHeight / 12) * 3.5));
+    }
+  }
   useEffect(() => {
     const playbackConst = 1000;
     const setHeight = setHeightRef.current;
@@ -81,20 +95,22 @@ const Video = ({ isMenuOpen }) => {
       setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
     }
 
+
     vid.addEventListener("loadedmetadata", handleLoadedMetadata);
     window.addEventListener('beforeunload', resetVideo);
 
     function scrollPlay() {
+
       const frameNumber = window.pageYOffset / playbackConst;
       vid.currentTime = frameNumber;
       window.onwheel = e => {
         if (e.deltaY >= 0) {
-          scrollUp();  
+          scrollUp();
         } else {
           scrollDown();
         }
       }
-      window.requestAnimationFrame(debounce(scrollPlay, 200));
+      window.requestAnimationFrame(scrollPlay);
     }
 
 
@@ -111,7 +127,7 @@ const Video = ({ isMenuOpen }) => {
   return (
     <>
 
-      <Box className={classes.videoContainer}>
+      <Box className={classes.videoContainer} >
         {
           isLoading && (
             <div className={classes.loadingOverlay}>
@@ -119,7 +135,14 @@ const Video = ({ isMenuOpen }) => {
             </div>
           )
         }
-        <video ref={vidRef} className={classes.video} onLoadedData={handleLoadData} playsInline>
+        <video
+          ref={vidRef}
+          className={classes.video}
+          onLoadedData={handleLoadData}
+          playsInline
+          onTouchStart={handleStartTouch}
+          onTouchEnd={handleEndTouch}
+        >
           <source src={HomeVideo} type="video/mp4" />
         </video>
       </Box>
