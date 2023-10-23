@@ -1,9 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
-// import List from "@mui/material/List";
-// import ListItem from "@mui/material/ListItem";
-// import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
 import PropTypes from "prop-types";
 import multiRect from "../../assets/images/multiRect.png";
