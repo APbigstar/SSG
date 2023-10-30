@@ -33,6 +33,7 @@
     "recharts": "^2.6.2",
     "sass": "^1.62.1",
     "scichart": "^3.1.333",
+    "scrolly-video": "^0.0.16",
     "scss": "^0.2.4",
     "styled-components": "^5.3.10",
     "typescript": "^5.0.4",

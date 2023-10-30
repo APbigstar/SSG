@@ -1,11 +1,11 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import Box from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
-import Header from "../../components/Header";
-import Menu from "./Menu";
-import Video from "./Video";
-import Content from "./Content";
-import { isMobile } from 'react-device-detect';
+const Header = lazy(() => import('../../components/Header'));
+const Menu = lazy(() => import('./Menu'));
+const Video = lazy(() => import('./Video'));
+const Content = lazy(() => import('./Content'));
+
 const useStyles = makeStyles({
 
   container: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     display: "none"
   },
   showContent: {
-    opacity:"1",
+    opacity: "1",
     display: "block"
   }
 
@@ -40,11 +40,12 @@ const useStyles = makeStyles({
 const Home = () => {
   const classes = useStyles();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
- 
+
 
   return (
     <>
-      <Box className={classes.container}>
+      <Suspense fallback={<div>Loading</div>}>
+        <Box className={classes.container}>
 
           <Header
             isMenuOpen={isMenuOpen}
@@ -52,12 +53,13 @@ const Home = () => {
           />
 
           <Box className={classes.section}>
-            <Video isMenuOpen={isMenuOpen} device={isMobile}/>
-            <Content isMenuOpen={isMenuOpen}/>
+            <Video isMenuOpen={isMenuOpen} />
+            <Content isMenuOpen={isMenuOpen} />
           </Box>
 
-          <Menu isMenuOpen={isMenuOpen}/>
-      </Box>
+          <Menu isMenuOpen={isMenuOpen} />
+        </Box>
+      </Suspense>
     </>
   );
 };
