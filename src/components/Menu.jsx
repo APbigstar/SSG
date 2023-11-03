@@ -12,11 +12,12 @@ const useStyles = makeStyles({
     dropView: {
         width: "100%",
         height: "100%",
-        position: "absolute",
+        position: "fixed",
         top: "0",
         zIndex: "1",
         backgroundColor: "black",
         opacity: "0",
+        visibility: "hidden",
         transition: "all 0.1s ease-in-out",
     },
     mainBox: {
@@ -160,7 +161,7 @@ const Menu = ({ isMenuOpen }) => {
 
     return (
         <>
-            <Box className={`${classes.dropView}  ${isMenuOpen ? classes.showContent : ""}`}>
+            <Box className={`${classes.dropView} `} sx={isMenuOpen ? {opacity: 1, visibility: 'initial'} : {opacity: 0}}>
                 <Box className={`${classes.mainBox}`}>
                     <Box className={classes.content}>
                         <Box className={classes.navBarTrans}>
@@ -178,7 +179,7 @@ const Menu = ({ isMenuOpen }) => {
                                     </Link>
                                 </Box>
                                 <Box className={classes.menuGroup}>
-                                    <Link>
+                                    <Link to='/service'>
                                         <div
                                             className={`${classes.listItemText} `}
                                             onMouseEnter={handleIcon}
@@ -189,7 +190,7 @@ const Menu = ({ isMenuOpen }) => {
                                     </Link>
                                 </Box>
                                 <Box className={classes.menuGroup}>
-                                    <Link>
+                                    <Link to='/discover'>
                                         <div
                                             className={`${classes.listItemText} `}
                                             onMouseEnter={handleIcon}

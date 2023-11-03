@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     zIndex: 10,
     padding: "0 100px",
     "@media (max-width: 430px)": {
-     padding: "0 25px",
+      padding: "0 25px",
     },
 
   },
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     "@media (max-width: 430px)": {
       width: "27px",
     },
-    transition:"all 0.2s ease-in-out"
+    transition: "all 0.2s ease-in-out"
   },
 
   secondMenuBar: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles({
     position: "relative",
     justifyContent: "space-evenly",
     alignItems: "center",
-    transition:"all 0.1s 0.2s ease-in-out",
+    transition: "all 0.1s 0.2s ease-in-out",
     "@media (max-width: 430px)": {
       marginTop: "8px",
       marginLeft: "-10px",
@@ -76,10 +76,10 @@ const useStyles = makeStyles({
     left: "-19px",
     transform: "rotate(45deg)",
     "@media (max-width: 430px)": {
-       left: "-3px",
+      left: "-3px",
     },
 
-    
+
   },
   secondMenuBarAction: {
     transform: "rotate(-45deg)",
@@ -92,17 +92,17 @@ const useStyles = makeStyles({
   },
 
   navBarHideAction: {
-    left:"-35%",
+    left: "-35%",
     opacity: 0.8,
     transition: "all 0.1s 0.1s ease-in-out",
     filter: "blur(10px)",
     zIndex: "-1"
   },
   navBarShowAction: {
-    left:"0%",
+    left: "0%",
     opacity: 1,
     transition: "all 0.1s 0.05s ease-in-out",
-    zIndex:"0"
+    zIndex: "0"
   },
   hiddenLogo: {
     opacity: "0",
@@ -110,14 +110,15 @@ const useStyles = makeStyles({
   },
   logo: {
     "@media (max-width: 430px)": {
-      width:"36px !important"
+      width: "36px !important"
     },
   }
 
 })
 
-const Header = ({ isMenuOpen, setIsMenuOpen }) => {
-
+// eslint-disable-next-line react/prop-types
+const Header = ({ isMenuOpen, setIsMenuOpen, loading }) => {
+  console.log(loading);
   const classes = useStyles();
   const [isShow, setIsShow] = React.useState(false)
   const langList = ["AN", "FR", "TR", "EN"];
@@ -129,50 +130,60 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
 
 
   return (
-    <Box className={classes.mainBox}>
-      <Box
-        className={classes.menuBtn}
-        onClick={showMenu}
-      >
-        <div className={`${classes.menuBar} ${ isMenuOpen ? classes.firstMenuBarAction : ""}`}></div>
-        <div className={`${classes.menuBar} ${classes.secondMenuBar} ${ isMenuOpen ? classes.secondMenuBarAction : ""}`}></div>
-      </Box>
+    <>
+      {
+        loading ? (
+          <div></div>
+        ) : (
 
-      <Box className={`${classes.brand} ${ isMenuOpen ? classes.navBarHideAction : classes.navBarShowAction} `} >
-        <img src={Brand} className={classes.brandImg} />
-      </Box>
+          <Box className={classes.mainBox}>
+            <Box
+              className={classes.menuBtn}
+              onClick={showMenu}
+            >
+              <div className={`${classes.menuBar} ${isMenuOpen ? classes.firstMenuBarAction : ""}`}></div>
+              <div className={`${classes.menuBar} ${classes.secondMenuBar} ${isMenuOpen ? classes.secondMenuBarAction : ""}`}></div>
+            </Box>
 
-      <Box className={`${ isMenuOpen ? classes.hiddenLogo : " "}`}>
-        <img
-          className={classes.logo}
-          src={Logo}
-          style={{ position: "relative" }}
-          onMouseEnter={() => setIsShow(true)}
-          onMouseLeave={() => setIsShow(false)}
-          
-        />
-        <Collapse
-          in={isShow}
-          sx={{ position: "absolute" }}
-          onMouseEnter={() => setIsShow(true)}
-          onMouseLeave={() => setIsShow(false)}
-        >
-          <List>
-            {langList.map((item) => (
-              <ListItem key={item}>
-                <ListItemText
-                  primaryTypographyProps={{
-                    className: classes.listItemText,
-                  }}
-                  sx={{ color: "#F39200", fontWeight: "800" }}
-                  primary={item}
-                />
-              </ListItem>
-            ))}
-          </List>
-        </Collapse>
-      </Box>
-    </Box>
+            <Box className={`${classes.brand} ${isMenuOpen ? classes.navBarHideAction : classes.navBarShowAction} `} >
+              <img src={Brand} className={classes.brandImg} />
+            </Box>
+
+            <Box className={`${isMenuOpen ? classes.hiddenLogo : " "}`}>
+              <img
+                className={classes.logo}
+                src={Logo}
+                style={{ position: "relative" }}
+                onMouseEnter={() => setIsShow(true)}
+                onMouseLeave={() => setIsShow(false)}
+
+              />
+              <Collapse
+                in={isShow}
+                sx={{ position: "absolute" }}
+                onMouseEnter={() => setIsShow(true)}
+                onMouseLeave={() => setIsShow(false)}
+              >
+                <List>
+                  {langList.map((item) => (
+                    <ListItem key={item}>
+                      <ListItemText
+                        primaryTypographyProps={{
+                          className: classes.listItemText,
+                        }}
+                        sx={{ color: "#F39200", fontWeight: "800" }}
+                        primary={item}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
+              </Collapse>
+            </Box>
+          </Box>
+        )
+      }
+
+    </>
   )
 }
 

@@ -1,12 +1,10 @@
 import React, { lazy, Suspense } from "react";
 import Box from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
-import PropTypes from 'prop-types';
-// const Header = lazy(() => import('../../components/Header'));
-// const Menu = lazy(() => import('./Menu'));
-const Video = lazy(() => import('../../components/Video'));
-// const Content = lazy(() => import('./Content'));
 import HomeVideo from '../../assets/video/home_video_browser.mp4';
+import Layout from '../../components/Layout';
+import Loading from '../../components/Loading';
+const Video = lazy(() => import('../../components/Video'));
 
 const useStyles = makeStyles({
 
@@ -39,17 +37,26 @@ const useStyles = makeStyles({
 
 });
 
-const Home = ({ isMenuOpen }) => {
+const Home = () => {
+  const [isLoad, setIsLoad] = React.useState(true);
   const classes = useStyles();
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsLoad(false);
+    }, 2000);
+  })
 
+  if(isLoad) {
+    return <Loading/>
+  }
   return (
     <>
-      <Suspense fallback={<div>Loading</div>}>
+      <Suspense>
         <Box className={classes.container}>
           <Box className={classes.section}>
-            <Video isMenuOpen={isMenuOpen} video={HomeVideo} />
-            {/* <Content isMenuOpen={isMenuOpen} /> */}
+            <Layout/>
+            <Video video={HomeVideo}/>
           </Box>
         </Box>
       </Suspense>
@@ -58,7 +65,3 @@ const Home = ({ isMenuOpen }) => {
 };
 
 export default Home;
-
-Home.propTypes = {
-  isMenuOpen: PropTypes.bool.isRequired, // isMenuOpen should be a boolean and is required
-}
