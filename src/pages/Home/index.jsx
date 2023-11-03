@@ -1,10 +1,10 @@
 import React, { lazy, Suspense } from "react";
 import Box from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
-import HomeVideo from '../../assets/video/home_video_browser.mp4';
 import Layout from '../../components/Layout';
 import Loading from '../../components/Loading';
 const Video = lazy(() => import('../../components/Video'));
+const HomeVideo  = lazy(() => import('../../assets/video/home_video_browser.mp4'));
 
 const useStyles = makeStyles({
 
@@ -42,10 +42,8 @@ const Home = () => {
   const classes = useStyles();
 
   React.useEffect(() => {
-    setTimeout(() => {
       setIsLoad(false);
-    }, 2000);
-  })
+  },[]);
 
   if(isLoad) {
     return <Loading/>
