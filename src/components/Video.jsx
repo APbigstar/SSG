@@ -42,7 +42,7 @@ const Video = ({video}) => {
   // }, [currentVideoIndex, videos]);
 
   return (
-    <Suspense>
+    <Suspense fallback={<div>123123</div>}>
     <div className="scrolly-container" style={{ height: '300vh' }}>
       <ScrollyVideo src={video} cover={true} full={true}/>
     </div>

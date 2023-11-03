@@ -1,25 +1,24 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types'
 import ServiceVideo from '../../assets/video/project_management.mp4';
-import Video from '../../components/Video';
-import Layout from '../../components/Layout';
+const Video = lazy(() => import('../../components/Video'));
+const Layout = lazy(() => import('../../components/Layout'));
 import Loading from '../../components/Loading';
 
 
 const Service = () => {
-  const [isLoad, setIsLoad] = React.useState(true);
+    const [isLoad, setIsLoad] = React.useState(true);
     React.useEffect(() => {
-            setIsLoad(false);
-    },[])
+        setIsLoad(!isLoad);
+    }, [])
 
-    if (isLoad) {
-        return <Loading />
-    }
     return (
-        <div className='container'>
-            <Layout />
-            <Video video={ServiceVideo} />
-        </div>
+        <Suspense fallback={<Loading/>}>
+            <div className='container'>
+                <Layout />
+                <Video video={ServiceVideo} />
+            </div>
+        </Suspense>
     )
 }
 
