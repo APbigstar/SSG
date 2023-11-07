@@ -1,7 +1,10 @@
 import React, { lazy ,Suspense} from "react";
 const ScrollyVideo = lazy(() => import('scrolly-video/dist/ScrollyVideo.cjs.jsx'));
-import PropTypes from 'prop-types';
 
+import PropTypes from 'prop-types';
+import Loading from "./Loading";
+
+// eslint-disable-next-line no-unused-vars
 const Video = ({video}) => {
   // const videoRef = React.useRef(null);
 
@@ -42,9 +45,13 @@ const Video = ({video}) => {
   // }, [currentVideoIndex, videos]);
 
   return (
-    <Suspense fallback={<div>123123</div>}>
+    <Suspense fallback={<Loading/>}>
     <div className="scrolly-container" style={{ height: '300vh' }}>
-      <ScrollyVideo src={video} cover={true} full={true}/>
+      <ScrollyVideo 
+        src={video} 
+        cover={true} 
+        full={true}
+      />
     </div>
     </Suspense>
   );

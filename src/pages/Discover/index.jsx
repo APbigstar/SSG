@@ -9,11 +9,13 @@ import Loading from '../../components/Loading';
 const Service = () => {
     const [isLoad, setIsLoad] = React.useState(true);
     React.useEffect(() => {
-        setIsLoad(!isLoad);
+        setTimeout(() => {
+            setIsLoad(!isLoad);
+        }, 6000);
     }, [])
 
     return (
-        <Suspense fallback={<Loading/>}>
+        <Suspense fallback={<Loading />}>
             <div className='container'>
                 <Layout />
                 <Video video={ServiceVideo} />

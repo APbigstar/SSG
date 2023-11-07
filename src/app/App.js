@@ -7,11 +7,11 @@ import Discover from '../pages/Discover';
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/service" element={<Service />} />
-        <Route path="/discover" element={<Discover />} />
-      </Routes>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/service" element={<Service />} />
+          <Route path="/discover" element={<Discover />} />
+        </Routes>
     </Router>
   );
 };

@@ -24,7 +24,7 @@
     "react-grid-carousel": "^1.0.1",
     "react-intersection-observer": "^9.5.2",
     "react-player": "^2.13.0",
-    "react-router-dom": "^6.11.1",
+    "react-router-dom": "^6.18.0",
     "react-scripts": "5.0.1",
     "react-scrollama": "^2.3.3",
     "react-slick": "^0.29.0",
