@@ -118,7 +118,6 @@ const useStyles = makeStyles({
 
 // eslint-disable-next-line react/prop-types
 const Header = ({ isMenuOpen, setIsMenuOpen, loading }) => {
-  console.log(loading);
   const classes = useStyles();
   const [isShow, setIsShow] = React.useState(false)
   const langList = ["AN", "FR", "TR", "EN"];

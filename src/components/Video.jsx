@@ -1,61 +1,57 @@
-import React, { lazy ,Suspense} from "react";
-const ScrollyVideo = lazy(() => import('scrolly-video/dist/ScrollyVideo.cjs.jsx'));
-
+import React, { useEffect, useRef } from "react";
+import Box from "@mui/material/Box";
+import { makeStyles } from "@mui/styles";
 import PropTypes from 'prop-types';
-import Loading from "./Loading";
 
-// eslint-disable-next-line no-unused-vars
-const Video = ({video}) => {
-  // const videoRef = React.useRef(null);
+const useStyles = makeStyles({
+  video: {
+    width: "100%",
+    height: "100%",
+    objectFit: "fill",
+  },
+});
 
-  // const handleVideoLoad = () => {
-  //   // The video has finished loading
-  //   console.log("Video has finished loading");
-  // };
-  // const videos = [
-  //   HomeVideoBrowser,
-  //   FinancialVideo,
-  //   ProjectVideo
-  // ];
+const Video = (props) => {
+  const classes = useStyles();
+  const vidRef = useRef(null);
+  const setHeightRef = useRef(null);
 
-  // const [currentVideoIndex, ] = React.useState(0);
-  // useEffect(() => {
+  useEffect(() => {
+    const playbackConst = 300;
+    const setHeight = setHeightRef.current;
 
-    // window.onwheel = e => {
-    //   if (e.deltaY >= 0) {
-    //     if(window.pageYOffset == 1926) {
-    //       if( currentVideoIndex < videos.length - 1 ) {
-    //         setCurrentVideoIndex( currentVideoIndex + 1);
-    //         window.scrollTo(0,0);
-    //       }
-    //     }
-    //     // scrollUp();
-    //   } else {
-    //     if(window.pageYOffset == 0) {
-    //       if( currentVideoIndex > 0 ) {
-    //         setCurrentVideoIndex( currentVideoIndex - 1);
-    //         window.scrollTo(0, window.pageYOffset);
-    //       }
-    //     }
-    //     // scrollDown();
-    //   }
-    // }
+    const vid = vidRef.current;
+    function handleLoadedMetadata() {
+      setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
+    }
 
-    // Make sure the DOM is loaded before interacting with it
-  // }, [currentVideoIndex, videos]);
+    vid.addEventListener("canplay", handleLoadedMetadata);
+
+    function scrollPlay() {
+      const frameNumber = window.pageYOffset / playbackConst;
+      vid.currentTime = frameNumber;
+      window.requestAnimationFrame(scrollPlay);
+    }
+
+    window.requestAnimationFrame(scrollPlay);
+
+    return () => {
+      window.cancelAnimationFrame(scrollPlay);
+      vid.removeEventListener("canplay", handleLoadedMetadata);
+    };
+  }, []);
 
   return (
-    <Suspense fallback={<Loading/>}>
-    <div className="scrolly-container" style={{ height: '300vh' }}>
-      <ScrollyVideo 
-        src={video} 
-        cover={true} 
-        full={true}
-      />
-    </div>
-    </Suspense>
+    <>
+      <Box style={{ position: "fixed", width: "100%", height: "100%" }}>
+        <video ref={vidRef} className={classes.video} autoPlay loop>
+          <source src={props.video} type="video/webm" />
+        </video>
+      </Box>
+      <div ref={setHeightRef}></div>
+    </>
   );
-}
+};
 
 export default Video;
 

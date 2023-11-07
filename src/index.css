@@ -16,6 +16,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
+  background: linear-gradient(90deg, #181c1f 1.26%, #1a1f1f 37.98%, #232a22 70.96%, #303b27 100%) !important; 
 }
 
 #root {
