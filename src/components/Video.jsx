@@ -1,57 +1,22 @@
-import React, { useEffect, useRef } from "react";
+import React, { lazy, Suspense } from "react";
+const ScrollyVideo = lazy(() => import('scrolly-video/dist/ScrollyVideo.cjs.jsx'));
 import Box from "@mui/material/Box";
-import { makeStyles } from "@mui/styles";
+
 import PropTypes from 'prop-types';
+import Loading from "./Loading";
 
-const useStyles = makeStyles({
-  video: {
-    width: "100%",
-    height: "100%",
-    objectFit: "fill",
-  },
-});
-
-const Video = (props) => {
-  const classes = useStyles();
-  const vidRef = useRef(null);
-  const setHeightRef = useRef(null);
-
-  useEffect(() => {
-    const playbackConst = 300;
-    const setHeight = setHeightRef.current;
-
-    const vid = vidRef.current;
-    function handleLoadedMetadata() {
-      setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
-    }
-
-    vid.addEventListener("canplay", handleLoadedMetadata);
-
-    function scrollPlay() {
-      const frameNumber = window.pageYOffset / playbackConst;
-      vid.currentTime = frameNumber;
-      window.requestAnimationFrame(scrollPlay);
-    }
-
-    window.requestAnimationFrame(scrollPlay);
-
-    return () => {
-      window.cancelAnimationFrame(scrollPlay);
-      vid.removeEventListener("canplay", handleLoadedMetadata);
-    };
-  }, []);
-
+// eslint-disable-next-line no-unused-vars
+const Video = ({ video }) => {
   return (
-    <>
-      <Box style={{ position: "fixed", width: "100%", height: "100%" }}>
-        <video ref={vidRef} className={classes.video} autoPlay loop>
-          <source src={props.video} type="video/webm" />
-        </video>
+    <Suspense fallback={<Loading />}>
+      <Box className="video_box">
+        <ScrollyVideo
+          src={video}
+        />
       </Box>
-      <div ref={setHeightRef}></div>
-    </>
+    </Suspense>
   );
-};
+}
 
 export default Video;
 

@@ -35,7 +35,8 @@ code {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  margin-right: 10px;
+  width: 2px;
 }
 
 ::-webkit-scrollbar-track {
@@ -48,4 +49,8 @@ code {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
+}
+
+.video_box>div {
+  height: calc(100vh - 122px) !important;
 }
